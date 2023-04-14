@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DistrictController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/xxx', [DistrictController::class, 'index'])->name('district.index');
+Route::post('/district', [DistrictController::class, 'store'])->name('district.store');
+Route::put('/district/{id}', [DistrictController::class, 'update'])->name('district.update');
+Route::delete('/district/{id}', [DistrictController::class, 'destroy'])->name('district.destroy');
+

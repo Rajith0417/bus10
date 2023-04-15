@@ -1,52 +1,50 @@
-<!-- resources/views/district/index.blade.php -->
-{{-- @extends('layout')
-
-@section('content') --}}
 <x-app-layout>
-    <h1>district</h1>
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th>Statistics</th>
-                <th>#1</th>
-                <th>#2</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Driver Name</td>
-                <td>John Doe</td>
-                <td>Mary Sue</td>
-            </tr>
-            <tr>
-                <td>Origin</td>
-                <td>Downtown</td>
-                <td>Uptown</td>
-            </tr>
-        </tbody>
-    </table>
-    <form action="{{ route('district.store') }}" method="POST">
-        @csrf
-        <input type="text" name="title" placeholder="Add new district...">
-        <button type="submit">Add</button>
-    </form>
-    <ul>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Districts</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-success" href="{{ route('districts.create') }}"> Create New district</a>
+            </div>
+        </div>
+    </div>
+
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
+    <table class="table table-bordered">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th width="280px">Action</th>
+        </tr>
         @foreach ($districts as $district)
-            <li>
-                <form action="{{ route('district.update', $district->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <label for="completed">{{$district->name}}</label>
-                    <input type="checkbox" name="completed" onChange="this.form.submit()" {{ $district->completed ? 'checked' : '' }}>
-                    <span style="{{ $district->completed ? 'text-decoration: line-through' : '' }}">{{ $district->title }}</span>
-                </form>
-                <form action="{{ route('district.destroy', $district->id) }}" method="POST">
+        <tr>
+            <td>{{ ++$i }}</td>
+            <td>{{ $district->name }}</td>
+            <td>{{ $district->detail }}</td>
+            <td>
+                <form action="{{ route('districts.destroy',$district->id) }}" method="POST">
+
+                    <a class="btn btn-info" href="{{ route('districts.show',$district->id) }}">Show</a>
+
+                    <a class="btn btn-primary" href="{{ route('districts.edit',$district->id) }}">Edit</a>
+
                     @csrf
                     @method('DELETE')
-                    <button>Delete</button>
+
+                    {{-- <button type="submit" class="btn btn-danger">Delete</button> --}}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                 </form>
-            </li>
+            </td>
+        </tr>
         @endforeach
-    </ul>
-{{-- @endsection --}}
+    </table>
+
+    {!! $districts->links() !!}
 </x-app-layout>

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Waypoint extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'level', 'lng', 'lat', 'district_id', 'show', 'parent_id'];
+    public $timestamps = true;
 }

@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\RoadController;
+use App\Http\Controllers\WaypointController;
+use App\Http\Controllers\DistanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +40,6 @@ require __DIR__.'/auth.php';
 // Route::put('/district/{id}', [DistrictController::class, 'update'])->name('district.update');
 // Route::delete('/district/{id}', [DistrictController::class, 'destroy'])->name('district.destroy');
 Route::resource('districts', DistrictController::class);
+Route::resource('roads', RoadController::class);
+Route::resource('waypoints', WaypointController::class);
 

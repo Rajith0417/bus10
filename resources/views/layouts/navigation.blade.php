@@ -49,6 +49,12 @@
                     <x-nav-link :href="route('districts.index')" :active="request()->routeIs('districts.index')">
                         {{ __('District') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('roads.index')" :active="request()->routeIs('roads.index')">
+                        {{ __('Road') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('waypoints.index')" :active="request()->routeIs('waypoints.index')">
+                        {{ __('Waypoint') }}
+                    </x-nav-link>
                 </div>
             </div>
 

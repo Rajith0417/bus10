@@ -39,7 +39,12 @@ require __DIR__.'/auth.php';
 // Route::post('/district', [DistrictController::class, 'store'])->name('district.store');
 // Route::put('/district/{id}', [DistrictController::class, 'update'])->name('district.update');
 // Route::delete('/district/{id}', [DistrictController::class, 'destroy'])->name('district.destroy');
-Route::resource('districts', DistrictController::class);
-Route::resource('roads', RoadController::class);
-Route::resource('waypoints', WaypointController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('districts', DistrictController::class);
+    Route::resource('roads', RoadController::class);
+    Route::resource('waypoints', WaypointController::class);
+
+    Route::get('/districtWaypoints/{id}', [WaypointController::class, 'test']);
+});
 
